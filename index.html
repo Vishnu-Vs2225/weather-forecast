@@ -13,14 +13,17 @@
 
 <body>
   <!-- BACKGROUND DECORATIVE GLOW ELEMENTS -->
-  <div class="bg-glow bg-glow-1"></div>
-  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-glow bg-glow-1" id="glow-1"></div>
+  <div class="bg-glow bg-glow-2" id="glow-2"></div>
+
+  <!-- WEATHER BACKGROUND PARTICLE CANVAS -->
+  <canvas id="weather-particles" class="weather-particles-canvas"></canvas>
 
   <div class="dashboard animate-fade-in">
 
     <!-- HEADER -->
     <header class="header">
-      <div class="logo">
+      <div class="logo" id="logo">
         <span class="logo-icon">🌤</span>
         <span class="logo-text">weather<span class="logo-accent">Forecast</span></span>
       </div>
@@ -39,6 +42,28 @@
         <div class="profile" title="User Profile">👤</div>
       </div>
     </header>
+
+    <!-- HERO PANEL -->
+    <section class="hero-section glass-card">
+      <div class="hero-content">
+        <div class="hero-header-row">
+          <h1 class="hero-greeting" id="hero-greeting">Good day!</h1>
+          <div class="live-indicator">
+            <span class="live-dot"></span> LIVE DATA
+          </div>
+        </div>
+        <p class="hero-subtitle">
+          Real-time meteorology metrics and precise 5-day projections. Select a city or query above to start.
+        </p>
+        <div class="quick-cities" id="quick-cities">
+          <button type="button" class="city-chip" data-city="London"><span class="chip-flag">🇬🇧</span> London</button>
+          <button type="button" class="city-chip" data-city="New York"><span class="chip-flag">🇺🇸</span> New York</button>
+          <button type="button" class="city-chip" data-city="Tokyo"><span class="chip-flag">🇯🇵</span> Tokyo</button>
+          <button type="button" class="city-chip" data-city="Paris"><span class="chip-flag">🇫🇷</span> Paris</button>
+          <button type="button" class="city-chip" data-city="Sydney"><span class="chip-flag">🇦🇺</span> Sydney</button>
+        </div>
+      </div>
+    </section>
 
     <!-- CUSTOM ALERT NOTIFICATION -->
     <div id="notification" class="notification hidden">
@@ -69,28 +94,43 @@
         </div>
       </div>
 
-      <div class="card small-card glass-card">
+      <div class="card small-card glass-card" id="wind-card">
         <div class="small-card-header">
           <span class="small-card-icon">💨</span>
           <h4>Wind</h4>
         </div>
         <p id="wind" class="metric-value">--</p>
+        <div class="metric-visual">
+          <div class="compass-dial">
+            <div id="compass-arrow" class="compass-arrow"></div>
+          </div>
+        </div>
       </div>
 
-      <div class="card small-card glass-card">
+      <div class="card small-card glass-card" id="humidity-card">
         <div class="small-card-header">
           <span class="small-card-icon">💧</span>
           <h4>Humidity</h4>
         </div>
         <p id="humidity" class="metric-value">--</p>
+        <div class="metric-visual">
+          <div class="progress-bar-track">
+            <div id="humidity-bar" class="progress-bar-fill" style="width: 0%"></div>
+          </div>
+        </div>
       </div>
 
-      <div class="card small-card glass-card">
+      <div class="card small-card glass-card" id="pressure-card">
         <div class="small-card-header">
           <span class="small-card-icon">🧭</span>
           <h4>Pressure</h4>
         </div>
         <p id="pressure" class="metric-value">--</p>
+        <div class="metric-visual">
+          <div class="gauge-track">
+            <div id="pressure-pin" class="gauge-pin" style="left: 50%"></div>
+          </div>
+        </div>
       </div>
     </section>
 
