@@ -3,65 +3,114 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title> Weather Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" >
+  <title>Weather Dashboard</title>
+  <!-- Google Fonts Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="dashboard">
+  <!-- BACKGROUND DECORATIVE GLOW ELEMENTS -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+
+  <div class="dashboard animate-fade-in">
 
     <!-- HEADER -->
     <header class="header">
-      <div class="logo">🌤wheatherForcast</div>
+      <div class="logo">
+        <span class="logo-icon">🌤</span>
+        <span class="logo-text">weather<span class="logo-accent">Forecast</span></span>
+      </div>
 
       <form id="weather-form" class="search-box">
-        <input type="text" id="city" placeholder="Search city..." required />
-        <button type="submit">🔍</button>
+        <input type="text" id="city" placeholder="Search city..." required autocomplete="off" />
+        <button type="submit" aria-label="Search">🔍</button>
       </form>
 
-      <div class="profile">👤</div>
+      <div class="header-actions">
+        <!-- Celsius/Fahrenheit Unit Toggle -->
+        <div class="unit-toggle" id="unit-toggle" title="Toggle temperature unit">
+          <button type="button" class="toggle-btn active" id="unit-c">°C</button>
+          <button type="button" class="toggle-btn" id="unit-f">°F</button>
+        </div>
+        <div class="profile" title="User Profile">👤</div>
+      </div>
     </header>
 
-    <!-- TOP GRID -->
+    <!-- CUSTOM ALERT NOTIFICATION -->
+    <div id="notification" class="notification hidden">
+      <span class="notification-icon">⚠️</span>
+      <span id="notification-message" class="notification-message">City not found!</span>
+      <button type="button" id="notification-close" class="notification-close">&times;</button>
+    </div>
+
+    <!-- MAIN WEATHER INFOCARD GRID -->
     <section class="top-grid">
 
-      <div class="card big-card">
-        <h3>Current Weather</h3>
+      <div class="card big-card glass-card">
+        <div class="card-header-row">
+          <h3>Current Weather</h3>
+          <span id="current-date" class="date-badge">--</span>
+        </div>
         <div class="weather-main">
-          <div class="temp">--°C</div>
-          <div class="details">
-            <p class="location">--</p>
-            <p class="condition">--</p>
+          <div class="weather-icon-container">
+            <img id="current-icon" src="https://openweathermap.org/img/wn/02d@4x.png" alt="Weather condition icon" class="weather-icon animate-pulse" />
+          </div>
+          <div class="temp-section">
+            <div class="temp">--°C</div>
+            <div class="details">
+              <p class="location">--</p>
+              <p class="condition">--</p>
+            </div>
           </div>
         </div>
       </div>
 
-      <div class="card small-card">
-        <h4>Wind</h4>
-        <p id="wind">--</p>
+      <div class="card small-card glass-card">
+        <div class="small-card-header">
+          <span class="small-card-icon">💨</span>
+          <h4>Wind</h4>
+        </div>
+        <p id="wind" class="metric-value">--</p>
       </div>
 
-      <div class="card small-card">
-        <h4>Humidity</h4>
-        <p id="humidity">--</p>
+      <div class="card small-card glass-card">
+        <div class="small-card-header">
+          <span class="small-card-icon">💧</span>
+          <h4>Humidity</h4>
+        </div>
+        <p id="humidity" class="metric-value">--</p>
       </div>
 
-      <div class="card small-card">
-        <h4>Pressure</h4>
-        <p id="pressure">--</p>
+      <div class="card small-card glass-card">
+        <div class="small-card-header">
+          <span class="small-card-icon">🧭</span>
+          <h4>Pressure</h4>
+        </div>
+        <p id="pressure" class="metric-value">--</p>
       </div>
     </section>
 
-    <!-- HOURLY FORECAST -->
-    <section class="forecast-card card">
-      <h3>Hour-by-Hour Forecast</h3>
-      <canvas id="hourlyChart"></canvas>
+    <!-- HOURLY FORECAST CHART -->
+    <section class="forecast-card card glass-card">
+      <div class="card-header-row">
+        <h3>Hour-by-Hour Forecast</h3>
+        <span class="chart-subtitle">Next 24 Hours</span>
+      </div>
+      <div class="chart-container">
+        <canvas id="hourlyChart"></canvas>
+      </div>
     </section>
 
     <!-- WEEKLY SUMMARY -->
-    <section class="weekly card">
-      <h3>7 Day Summary</h3>
+    <section class="weekly card glass-card">
+      <div class="card-header-row">
+        <h3>5-Day Forecast</h3>
+        <span class="weekly-subtitle">Daily Trends</span>
+      </div>
       <div id="weekly-list" class="weekly-list"></div>
     </section>
 
@@ -70,9 +119,7 @@
   <!-- Chart.js CDN -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-  <!-- Your JS file -->
- 
-
-<script src="script.js"></script>
+  <!-- Main logic -->
+  <script src="script.js"></script>
 </body>
 </html>
